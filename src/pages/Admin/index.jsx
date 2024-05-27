@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
@@ -12,11 +12,32 @@ import { useSelector } from "react-redux";
 
 function Admin() {
   const { portfolioData } = useSelector((state) => state.root);
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      window.location.href = "/admin-login";
+    }
+  }, []);
+
   return (
     <div>
       <Header />
+      <div className="flex items-center justify-between border-b border-gray-500 mx-5">
+        <div>
+          <h1 className="text-2xl py-2 text-primary">Portfolio Admin</h1>
+        </div>
+        <h1
+          className="underline text-primary text-xl cursor-pointer"
+          onClick={() => {
+            localStorage.clear()
+            window.location.href = "/admin-login"
+          }}
+        >
+          Logout
+        </h1>
+      </div>
       {portfolioData && (
-        <div className="mt-5 p-5">
+        <div className="px-5 pb-10">
           <Tabs defaultActiveKey="1">
             <TabPane tab="Intro" key="1">
               <AdminIntro />

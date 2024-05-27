@@ -90,3 +90,10 @@ textarea{
   height: 100px;
   padding-top: 10px;
 }
+
+/* truncate */
+.truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

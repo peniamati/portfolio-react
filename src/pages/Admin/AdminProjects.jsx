@@ -1,73 +1,174 @@
 import React from "react";
-import { Form, Input, message } from "antd";
-import TextArea from "antd/es/input/TextArea";
 import { useDispatch, useSelector } from "react-redux";
-import { HideLoading, ShowLoading } from "../../redux/rootSlice";
 import axios from "axios";
+import TextArea from "antd/es/input/TextArea";
+import { Modal, Form, Input, message } from "antd";
+import { HideLoading, ReloadData, ShowLoading } from "../../redux/rootSlice";
 
-function AdminAbout() {
+function AdminProjects() {
   const dispatch = useDispatch();
   const { portfolioData } = useSelector((state) => state.root);
+  const { projects } = portfolioData;
+  const [showAddEditModal, setShowAddEditModal] = React.useState(false);
+  const [selectedItemForEdit, setSelectedItemForEdit] = React.useState(null);
+  const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     try {
       dispatch(ShowLoading());
-      const response = await axios.post(
-        "http://peniamatias.alwaysdata.net/api/portfolio/update-projects",
-        {
-          ...values,
-          _id: portfolioData.projects._id,
-        }
-      );
+      let response;
+
+      if (selectedItemForEdit) {
+        response = await axios.post(
+          "http://peniamatias.alwaysdata.net/api/portfolio/update-project",
+          {
+            ...values,
+            _id: selectedItemForEdit._id,
+          }
+        );
+      } else {
+        response = await axios.post(
+          "http://peniamatias.alwaysdata.net/api/portfolio/add-project",
+          values
+        );
+      }
+
       dispatch(HideLoading());
+
       if (response.data.success) {
         message.success(response.data.message);
+        setShowAddEditModal(false);
+        setSelectedItemForEdit(null);
+        dispatch(ReloadData(true));
+        form.resetFields();
       } else {
         message.error(response.data.message);
       }
     } catch (error) {
       dispatch(HideLoading());
-      message.error(error.response.data.message);
+      message.error(error.message);
     }
   };
 
+  const onDelete = async (item) => {
+    try {
+      dispatch(ShowLoading());
+      const response = await axios.post(
+        "http://peniamatias.alwaysdata.net/api/portfolio/delete-project",
+        {
+          _id: item._id,
+        }
+      );
+      dispatch(HideLoading());
+      if (response.data.success) {
+        message.success(response.data.message);
+        dispatch(HideLoading());
+        dispatch(ReloadData(true));
+      } else {
+        message.error(response.data.message);
+      }
+    } catch (error) {
+      dispatch(HideLoading());
+      message.error(error.message);
+    }
+  };
+
+  const handleAddClick = () => {
+    setSelectedItemForEdit(null);
+    form.resetFields();
+    setShowAddEditModal(true);
+  };
+
+  const handleEditClick = (project) => {
+    setSelectedItemForEdit(project);
+    form.setFieldsValue(project);
+    setShowAddEditModal(true);
+  };
+
+  const handleCancelClick = () => {
+    form.resetFields();
+    setSelectedItemForEdit(null);
+    setShowAddEditModal(false);
+  };
+
   return (
-    <div>
-      <Form
-        onFinish={onFinish}
-        layout="vertical"
-        initialValues={portfolioData.projects}
-      >
-        <Form.Item
-          name="projects"
-          label="Projects"
-          rules={[
-            {
-              required: true,
-              message: "Please enter your projects",
-            },
-          ]}
+    <div className="">
+      <div className="flex justify-end mb-5">
+        <button
+          className="bg-primary px-5 py-2 text-white"
+          onClick={handleAddClick}
         >
-          <TextArea
-            rows={4}
-            placeholder="Enter your projects"
-            name="projects"
-          />
-        </Form.Item>
-        <Form.Item>
-          <div className="flex justify-end">
+          Add Project
+        </button>
+      </div>
+
+      <div className="grid grid-cols-3 gap-5 sm:grid-cols-1">
+        {projects.map((project) => (
+          <div
+            className="shadow border p-5 border-gray-400 flex flex-col gap-5"
+            key={project._id}
+          >
+            <h1 className="text-primary text-xl font-bold">
+              {project.title}
+            </h1>
+            <hr />
+            <img src={project.image} alt="" className="h-60 w-80"/>
+            <h1>Description: {project.description}</h1>
+            <h1>Link: {project.link}</h1>
+            <div className="flex justify-end gap-5 mt-5">
+              <button
+                className="px-5 py-2 bg-primary text-white"
+                onClick={() => handleEditClick(project)}
+              >
+                Edit
+              </button>
+              <button
+                className="px-5 py-2 bg-red-500 text-white"
+                onClick={() => onDelete(project)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <Modal
+        open={showAddEditModal}
+        title={selectedItemForEdit ? "Edit project" : "Add project"}
+        footer={null}
+        onCancel={handleCancelClick}
+      >
+        <Form layout="vertical" form={form} onFinish={onFinish}>
+          <Form.Item name="image" label="Image">
+            <Input type="text" placeholder="Image" />
+          </Form.Item>
+          <Form.Item name="title" label="Title">
+            <Input type="text" placeholder="Title" />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <TextArea type="text" placeholder="Description" />
+          </Form.Item>
+          <Form.Item name="link" label="Link">
+            <Input type="text" placeholder="Link" />
+          </Form.Item>
+
+          <div className="flex justify-end gap-5">
             <button
-              className="px-10 py-2 bg-primary text-white"
-              type="primary"
-              htmlType="submit"
+              className="px-5 py-2 bg-red-500 text-white"
+              onClick={handleCancelClick}
+              type="button"
             >
-              Save
+              Cancel
+            </button>
+            <button type="submit" className="px-5 py-2 bg-primary text-white">
+              {selectedItemForEdit ? "Update" : "Add"}
             </button>
           </div>
-        </Form.Item>
-      </Form>
+        </Form>
+      </Modal>
     </div>
   );
 }
 
-export default AdminAbout;
+export default AdminProjects;

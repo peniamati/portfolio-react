@@ -5,22 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/rootSlice";
 import axios from "axios";
 
-function AdminAbout() {
+function AdminContact() {
   const dispatch = useDispatch();
   const { portfolioData } = useSelector((state) => state.root);
 
   const onFinish = async (values) => {
     try {
-      const tempSkills = values.skills.split(", ");
-      values.skills = tempSkills;
       dispatch(ShowLoading());
-      const response = await axios.post(
-        "http://peniamatias.alwaysdata.net/api/portfolio/update-projects",
-        {
-          ...values,
-          _id: portfolioData.projects._id,
-        }
-      );
+      const response = await axios.post("http://peniamatias.alwaysdata.net/api/portfolio/update-contact", {
+        ...values,
+        _id: portfolioData.contact._id,
+      });
       dispatch(HideLoading());
       if (response.data.success) {
         message.success(response.data.message);
@@ -29,7 +24,7 @@ function AdminAbout() {
       }
     } catch (error) {
       dispatch(HideLoading());
-      message.error(error.response.data.message);
+      message.error(response.data.message);
     }
   };
 
@@ -38,47 +33,37 @@ function AdminAbout() {
       <Form
         onFinish={onFinish}
         layout="vertical"
-        initialValues={portfolioData.projects}
+        initialValues={portfolioData.contact}
       >
-        <Form.Item
-          label="Name"
-          name="name"
-          rules={[
-            {
-              required: true,
-              message: "Please enter name",
-            },
-          ]}
-        >
-          <Input />
+        <Form.Item name="name" label="Name">
+          <Input placeholder="Name" />
         </Form.Item>
-        <Form.Item
-          label="Description"
-          name="description"
-          rules={[
-            {
-              required: true,
-              message: "Please enter description",
-            },
-          ]}
-        >
-          <TextArea rows={4} />
+        <Form.Item name="age" label="Age">
+          <Input placeholder="Age" />
         </Form.Item>
-
-        <Form.Item>
-          <div className="flex justify-end">
-            <button
-              className="px-10 py-2 bg-primary text-white"
-              type="primary"
-              htmlType="submit"
-            >
-              Save
-            </button>
-          </div>
+        <Form.Item name="gender" label="Gender">
+          <Input placeholder="Gender" />
         </Form.Item>
+        <Form.Item name="email" label="Email">
+          <Input placeholder="Email" />
+        </Form.Item>
+        <Form.Item name="mobile" label="Mobile">
+          <Input placeholder="Mobile" />
+        </Form.Item>
+        <Form.Item name="country" label="Country">
+          <Input placeholder="Country" />
+        </Form.Item>
+        <Form.Item name="city" label="City">
+          <Input placeholder="City" />
+        </Form.Item>
+        <div className="flex justify-end">
+          <button className="px-10 py-2 bg-primary text-white" type="submit">
+            Save
+          </button>
+        </div>
       </Form>
     </div>
   );
 }
 
-export default AdminAbout;
+export default AdminContact;

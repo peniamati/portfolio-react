@@ -29,7 +29,7 @@ function AdminAbout() {
       }
     } catch (error) {
       dispatch(HideLoading());
-      message.error(error.response.data.message);
+      message.error(error.message);
     }
   }; 
 
