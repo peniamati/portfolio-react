@@ -54,7 +54,7 @@ function AdminCourses() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "http://peniamatias.alwaysdata.net/api/portfolio/delete-course",
+        "https://peniamatias.alwaysdata.net/api/portfolio/delete-course",
         {
           _id: item._id,
         }

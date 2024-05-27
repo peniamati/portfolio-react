@@ -54,7 +54,7 @@ function AdminProjects() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "http://peniamatias.alwaysdata.net/api/portfolio/delete-project",
+        "https://peniamatias.alwaysdata.net/api/portfolio/delete-project",
         {
           _id: item._id,
         }

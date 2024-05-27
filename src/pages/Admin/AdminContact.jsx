@@ -12,7 +12,7 @@ function AdminContact() {
   const onFinish = async (values) => {
     try {
       dispatch(ShowLoading());
-      const response = await axios.post("http://peniamatias.alwaysdata.net/api/portfolio/update-contact", {
+      const response = await axios.post("https://peniamatias.alwaysdata.net/api/portfolio/update-contact", {
         ...values,
         _id: portfolioData.contact._id,
       });

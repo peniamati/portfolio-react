@@ -15,7 +15,7 @@ function AdminAbout() {
       values.skills = tempSkills;
       dispatch(ShowLoading());
       const response = await axios.post(
-        "http://peniamatias.alwaysdata.net/api/portfolio/update-about",
+        "https://peniamatias.alwaysdata.net/api/portfolio/update-about",
         {
           ...values,
           _id: portfolioData.about._id,
