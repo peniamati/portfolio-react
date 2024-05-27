@@ -21,7 +21,7 @@ function Contact() {
   nombre: ${contact.name}
   edad: ${contact.age}
   género: ${contact.gender}
-  correo electrónico: ${contact.email}
+  email: ${contact.email}
   móvil: ${contact.mobile}
   país: ${contact.country}
   ciudad: ${contact.city}
