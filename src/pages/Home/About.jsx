@@ -31,11 +31,11 @@ function About() {
         </div>
       </div>
 
-      <div className="py-5 items-center">
+      <div className="py-5">
         <h1 className="text-tertiary text-xl text-center">
           Here are a few technologies I've been working with recently:
         </h1>
-        <div className="flex flex-wrap gap-10 mt-5 sm:justify-center">
+        <div className="flex flex-wrap gap-10 mt-5 justify-center">
           {skills.map((skill) => (
             <div className="border border-tertiary py-3 px-5">
               <h1 className="text-tertiary">{skill}</h1>
