@@ -31,7 +31,7 @@ function About() {
         </div>
       </div>
 
-      <div className="py-5">
+      <div className="py-5 items-center">
         <h1 className="text-tertiary text-xl text-center">
           Here are a few technologies I've been working with recently:
         </h1>

@@ -7,6 +7,7 @@ import Loader from "./components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, SetPortfolioData, ShowLoading, ReloadData } from "./redux/rootSlice";
 import Login from "./pages/Admin/Login";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 function App() {
   const {loading , portfolioData, reloadData} = useSelector((state) => state.root)
@@ -44,6 +45,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin-login" element={<Login />} />
       </Routes>
+      <WhatsAppButton /> 
     </BrowserRouter>
   );
 }
