@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, message } from "antd";
+import { Form, Input, Select, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/rootSlice";
@@ -43,9 +43,6 @@ function AdminAbout() {
           skills: portfolioData.about.skills.join(", "),
         }}
       >
-        <Form.Item name="lottieUrl" label="Lottie Url">
-          <Input placeholder="Lottie Url" />
-        </Form.Item>
         <Form.Item name="description1" label="Description1">
           <TextArea placeholder="Description1" />
         </Form.Item>
@@ -57,6 +54,12 @@ function AdminAbout() {
         </Form.Item>
         <Form.Item name="skills" label="Skills">
           <Input placeholder="Skills" />
+        </Form.Item>
+        <Form.Item name="language" label="Language">
+          <Select placeholder="Language" >
+            <Select.Option value="EN">English</Select.Option>
+            <Select.Option value="ES">Spanish</Select.Option>
+          </Select>
         </Form.Item>
         <div className="flex justify-end">
           <button className="px-10 py-2 bg-primary text-white" type="submit">

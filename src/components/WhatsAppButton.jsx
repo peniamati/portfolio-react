@@ -2,9 +2,9 @@ import React from 'react';
 import whatsappLogo from '../images/WhatsApp.png';
 
 const WhatsAppButton = () => {
+  const isSpanish = localStorage.getItem("language") === "ES";
 
-  const mensaje = encodeURIComponent(`Hi, i am interested in your portfolio`);
-
+  const mensaje = encodeURIComponent(`${isSpanish ? 'Hola, me interesa tu portfolio' : 'Hi, i am interested in your portfolio'}`);
 
   const handleClick = () => {
 

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import TextArea from "antd/es/input/TextArea";
-import { Modal, Form, Input, message } from "antd";
+import { Modal, Form, Input, message, Select } from "antd";
 import { HideLoading, ReloadData, ShowLoading } from "../../redux/rootSlice";
 
 function AdminExperiences() {
@@ -115,6 +115,7 @@ function AdminExperiences() {
             <h1>Company: {experience.company}</h1>
             <h1>Role: {experience.title}</h1>
             <h1>Description: {experience.description}</h1>
+            <h1>Language: {experience.language}</h1>
             <div className="flex justify-end gap-5 mt-5">
               <button
                 className="px-5 py-2 bg-primary text-white"
@@ -151,6 +152,12 @@ function AdminExperiences() {
           </Form.Item>
           <Form.Item name="description" label="Description">
             <TextArea type="text" placeholder="Description" />
+          </Form.Item>
+          <Form.Item name="language" label="Language">
+            <Select placeholder="Language">
+              <Select.Option value="EN">English</Select.Option>
+              <Select.Option value="ES">Spanish</Select.Option>
+            </Select>
           </Form.Item>
 
           <div className="flex justify-end gap-5">

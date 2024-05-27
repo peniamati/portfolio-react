@@ -6,9 +6,11 @@ function Courses() {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const {portfolioData} = useSelector((state) => state.root)
   const {courses} = portfolioData;
+
+  const isSpanish = courses[0].language === "ES";
   return (
     <div>
-      <SectionTitle title="Courses"/>   
+      <SectionTitle title={isSpanish ? "Cursos" : "Courses"}/>   
 
       <div className="flex py-10 gap-20 text-center sm:flex-col">
         <div className="flex flex-col gap-10 border-l-2 border-[#135e4c82] overflow-y-scroll h-[400px] w-1/3 sm:flex-row sm:overflow-x-scroll sm:w-full sm:h-fit sm:overflow-y-hidden">

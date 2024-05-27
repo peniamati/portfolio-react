@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, message } from "antd";
+import { Form, Input, Select, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useDispatch, useSelector } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/rootSlice";
@@ -55,6 +55,12 @@ function AdminContact() {
         </Form.Item>
         <Form.Item name="city" label="City">
           <Input placeholder="City" />
+        </Form.Item>
+        <Form.Item name="language" label="Language">
+          <Select placeholder="Language" >
+            <Select.Option value="EN">English</Select.Option>
+            <Select.Option value="ES">Spanish</Select.Option>
+          </Select>
         </Form.Item>
         <div className="flex justify-end">
           <button className="px-10 py-2 bg-primary text-white" type="submit">

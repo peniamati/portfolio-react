@@ -6,14 +6,17 @@ function About() {
   const {loading , portfolioData} = useSelector((state) => state.root)
   const {about} = portfolioData;
   const {skills, lottieUrl, description1, description2, description3} = about;
+
+  // Verifica si el idioma es español (ES)
+  const isSpanish = about.language === "ES";
   return (
     <div>
-      <SectionTitle title="About Me" />
+      <SectionTitle title={isSpanish ? "Acerca de mi" : "About Me"} />
 
       <div className="flex w-full items-center sm:flex-col sm:text-center">
         <div className="h-3/4 w-1/2 sm:w-full">
           <dotlottie-player
-            src={lottieUrl || ''}
+            src="https://lottie.host/46fdb34b-d21f-4507-a28a-1f312d8b5ac1/gM84Hs56aG.json"
             background="transparent"
             speed="1"
             autoplay
@@ -33,7 +36,7 @@ function About() {
 
       <div className="py-5">
         <h1 className="text-tertiary text-xl text-center">
-          Here are a few technologies I've been working with recently:
+          {isSpanish ? "Estas son algunas de las tecnologías que he estado estudiando recientemente" : "Here are a few technologies I've been working with recently:"}
         </h1>
         <div className="flex flex-wrap gap-10 mt-5 justify-center">
           {skills.map((skill) => (

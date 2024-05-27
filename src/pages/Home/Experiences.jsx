@@ -6,9 +6,11 @@ function Experiences() {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const {portfolioData} = useSelector((state) => state.root)
   const {experiences} = portfolioData;
+
+  const isSpanish = experiences[0].language === "ES";
   return (
     <div>
-      <SectionTitle title="Experiences" />
+      <SectionTitle title={isSpanish ? "Experiencias" : "Experiences"} />
 
       <div className="flex py-10 gap-20 text-center sm:flex-col">
         <div className="flex flex-col gap-10 border-l-2 border-[#135e4c82] w-1/3 sm:flex-row sm:overflow-x-scroll sm:w-full">

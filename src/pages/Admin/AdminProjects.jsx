@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import TextArea from "antd/es/input/TextArea";
-import { Modal, Form, Input, message } from "antd";
+import { Modal, Form, Input, message, Select } from "antd";
 import { HideLoading, ReloadData, ShowLoading } from "../../redux/rootSlice";
 
 function AdminProjects() {
@@ -108,13 +108,12 @@ function AdminProjects() {
             className="shadow border p-5 border-gray-400 flex flex-col gap-5"
             key={project._id}
           >
-            <h1 className="text-primary text-xl font-bold">
-              {project.title}
-            </h1>
+            <h1 className="text-primary text-xl font-bold">{project.title}</h1>
             <hr />
-            <img src={project.image} alt="" className="h-60 w-80"/>
+            <img src={project.image} alt="" className="h-60 w-80" />
             <h1>Description: {project.description}</h1>
             <h1>Link: {project.link}</h1>
+            <h1>Language: {project.language}</h1>
             <div className="flex justify-end gap-5 mt-5">
               <button
                 className="px-5 py-2 bg-primary text-white"
@@ -151,6 +150,12 @@ function AdminProjects() {
           </Form.Item>
           <Form.Item name="link" label="Link">
             <Input type="text" placeholder="Link" />
+          </Form.Item>
+          <Form.Item name="language" label="Language">
+            <Select placeholder="Language">
+              <Select.Option value="EN">English</Select.Option>
+              <Select.Option value="ES">Spanish</Select.Option>
+            </Select>
           </Form.Item>
 
           <div className="flex justify-end gap-5">
