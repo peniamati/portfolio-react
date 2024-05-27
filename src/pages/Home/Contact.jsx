@@ -13,7 +13,7 @@ function Contact() {
     <div>
       <SectionTitle title={isSpanish ? "Di Hola" : "Say Hi"} />
 
-      <div className="flex sm:flex-col items-center justify-center gap-20">
+      <div className="flex sm:flex-col px-5 justify-center gap-10">
         <div className="flex flex-col w-1/3">
           {isSpanish ? (
             <pre className="text-tertiary text-sm">
