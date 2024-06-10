@@ -20,7 +20,7 @@ function AdminExperiences() {
 
       if (selectedItemForEdit) {
         response = await axios.post(
-          "http://peniamatias.alwaysdata.net/api/portfolio/update-experience",
+          "https://peniamatias.alwaysdata.net/api/portfolio/update-experience",
           {
             ...values,
             _id: selectedItemForEdit._id,
@@ -28,7 +28,7 @@ function AdminExperiences() {
         );
       } else {
         response = await axios.post(
-          "http://peniamatias.alwaysdata.net/api/portfolio/add-experience",
+          "https://peniamatias.alwaysdata.net/api/portfolio/add-experience",
           values
         );
       }

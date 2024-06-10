@@ -20,7 +20,7 @@ function AdminProjects() {
 
       if (selectedItemForEdit) {
         response = await axios.post(
-          "http://peniamatias.alwaysdata.net/api/portfolio/update-project",
+          "https://peniamatias.alwaysdata.net/api/portfolio/update-project",
           {
             ...values,
             _id: selectedItemForEdit._id,
@@ -28,7 +28,7 @@ function AdminProjects() {
         );
       } else {
         response = await axios.post(
-          "http://peniamatias.alwaysdata.net/api/portfolio/add-project",
+          "https://peniamatias.alwaysdata.net/api/portfolio/add-project",
           values
         );
       }

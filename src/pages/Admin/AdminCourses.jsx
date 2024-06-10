@@ -20,7 +20,7 @@ function AdminCourses() {
 
       if (selectedItemForEdit) {
         response = await axios.post(
-          "http://peniamatias.alwaysdata.net/api/portfolio/update-course",
+          "https://peniamatias.alwaysdata.net/api/portfolio/update-course",
           {
             ...values,
             _id: selectedItemForEdit._id,
@@ -28,7 +28,7 @@ function AdminCourses() {
         );
       } else {
         response = await axios.post(
-          "http://peniamatias.alwaysdata.net/api/portfolio/add-course",
+          "https://peniamatias.alwaysdata.net/api/portfolio/add-course",
           values
         );
       }
