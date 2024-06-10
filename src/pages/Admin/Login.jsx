@@ -20,18 +20,25 @@ function Login() {
         user
       );
       dispatch(HideLoading());
+  
       if (response.data.success) {
         message.success(response.data.message);
         localStorage.setItem("token", JSON.stringify(response.data));
         window.location.href = "/admin";
       } else {
-        message.error(response.data.message);
+        message.error(response.data.message); // Display the error message from the server
       }
     } catch (error) {
-      message.error(error.message);
+      // Check if the error response exists and contains the message from the server
+      if (error.response && error.response.data && error.response.data.message) {
+        message.error(error.response.data.message);
+      } else {
+        message.error("An unexpected error occurred. Please try again."); // Fallback error message
+      }
       dispatch(HideLoading());
     }
   };
+  
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
